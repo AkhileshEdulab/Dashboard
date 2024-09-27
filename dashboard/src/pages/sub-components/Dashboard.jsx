@@ -3,44 +3,22 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-import { clearAllApplicationSliceErrors, deleteSoftwareApplication, getAllSoftwareApplication, resetApplicationSlice } from '@/store/slices/softwareApplicationSlice';
-
-import { Progress } from '@radix-ui/react-progress';
 import { Tabs, TabsContent } from '@radix-ui/react-tabs';
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector,} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import SpacialLoadingButton from './SpacialLoadingButton';
+import { Progress } from '../../components/ui/progress';
+
  
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.user);
   const { projects } = useSelector((state) => state.project);
-  
   const { skills } = useSelector((state) => state.skill); 
-  const { timeline } = useSelector((state) => state.timeline); 
-  const { softwareApplication ,error,loading,message} = useSelector((state) => state.application);
+  const { timelines } = useSelector((state) => state.timeline); 
+  const { softwareApplication ,loading, } = useSelector((state) => state.application);
   
-  const dispatch = useDispatch();
-  const [appId,setAppId]=useState("");
-  const handelDeleteSoftwareApp = (id) =>{
-    setAppId(id);
-    dispatch(deleteSoftwareApplication(id));
-  };
-
-  useEffect(()=>{
-    if(error){
-     toast.error(error)
-     dispatch(clearAllApplicationSliceErrors())
-    }
-    if(message){
-      toast.success(message);
-        dispatch(resetApplicationSlice());
-        dispatch(getAllSoftwareApplication());
-      
-    }
-  },[dispatch,error,message,loading])
   return (
     <>
       <div className='flex flex-col sm:gap-4 sm:py-4 sm:pl-14'>
@@ -153,8 +131,9 @@ const Dashboard = () => {
                             <Card key={element._id}>
                               <CardHeader>{element.title}</CardHeader>
                               <CardFooter>
-                                <Progress value={element.proficiency}/>
-                              </CardFooter>
+                              <Progress value={element.proficiency > 0 ? element.proficiency : null}  />
+                             </CardFooter>
+                            
                             </Card>
                           )
                         })
@@ -164,6 +143,10 @@ const Dashboard = () => {
                 </Card>
               </TabsContent>
             </Tabs>
+
+
+
+
 
             <Tabs>
               <TabsContent className='grid min-[1050px]:grid-cols-2 gap-4'>
@@ -227,8 +210,8 @@ const Dashboard = () => {
                           </TableHeader>
                           <TableBody>
                             {
-                              timeline && timeline.length > 0 ? (
-                               timeline.map(element=>{
+                              timelines && timelines.length > 0 ? (
+                               timelines.map(element=>{
                                 return(
                                   <TableRow className='bg-accent' key={element._id}>
                                     <TableCell className='font-medium'>{element.title}</TableCell>

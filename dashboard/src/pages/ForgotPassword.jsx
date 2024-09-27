@@ -8,6 +8,7 @@ import { Label } from '@radix-ui/react-dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
+
 function ForgotPassword() {
   const [email,setEmail] = useState('')
   const {loding ,error,message} = useSelector((state)=>state.forgotPassword);
@@ -71,7 +72,7 @@ function ForgotPassword() {
       </div>
       <div className="hidden bg-muted lg:block">
         <img
-          src="/placeholder.svg"
+          src="https://img.freepik.com/free-vector/forgot-password-concept-illustration_114360-1095.jpg"
           alt="Image"
           className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />

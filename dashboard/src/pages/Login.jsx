@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { clearAllErrors, login } from '@/store/slices/userSlice';
 import SpacialLoadingButton from './sub-components/SpacialLoadingButton';
+import loginImage from '../assets/login.webp';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -81,7 +82,7 @@ const Login = () => {
       </div>
       <div className="hidden bg-muted lg:block">
         <img
-          src="/placeholder.svg"
+          src={loginImage}
           alt="Image"
           className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />

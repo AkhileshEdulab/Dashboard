@@ -7,25 +7,23 @@ const timelineSlice = createSlice({
     name: "timeline",
     initialState: {
         loading: false,
-        timeline: [], 
+        timelines: [], 
         error: null,
         message: null, 
     },
     reducers: {
-        getAllTimelineRequest(state,action) {
+        getAllTimelineRequest(state) {
             state.loading = true;
             state.error = null;
-            state.timeline=[];
         },
         getAllTimelineSuccess(state, action) {
-            state.timeline = action.payload; 
+            state.timelines = action.payload; // Set timeline data
             state.loading = false;
             state.error = null;
         },
         getAllTimelineFailed(state, action) {
-            state.timeline = state.timeline;
-            state.error = action.payload;
             state.loading = false;
+            state.error = action.payload; // Set error message
         },
         deleteTimelineRequest(state) {
             state.message = null;
@@ -72,27 +70,22 @@ const timelineSlice = createSlice({
         },
     },
 });
-
-
 export const getAllTimeline = () => async (dispatch) => {
-    dispatch(timelineSlice.actions.getAllTimelineRequest());
-    
-    
+    dispatch(getAllTimelineRequest()); 
     try {
         const { data } = await axios.get("http://localhost:4000/api/v1/timeline/getall", {
             withCredentials: true,
         });
-        
-        dispatch(timelineSlice.actions.getAllTimelineSuccess(data.timeline));
+        console.log("Fetched timeline data:", data); // Log the fetched data
+        dispatch(getAllTimelineSuccess(data.timelines)); // Pass timeline data to success action
     } catch (error) {
         console.error("API Error:", error);
-        dispatch(timelineSlice.actions.getAllTimelineFailed(
-            error.response?.data?.message || "Failed to fetch messages"
+        dispatch(getAllTimelineFailed(
+            error.response?.data?.message || "Failed to fetch timeline"
         ));
     }
 };
 
-// Thunk to delete a message by ID
 export const deleteTimeline = (id) => async (dispatch) => {
     dispatch(timelineSlice.actions.deleteTimelineRequest());
     try {
@@ -125,15 +118,21 @@ export const addNewTimeline = (timelineData) => async (dispatch) => {
     }
 };
 
-// Thunk to reset the message slice
+
 export const resetTimelineSlice = () => (dispatch) => {
     dispatch(timelineSlice.actions.resetTimelineSlice());
 };
 
-// Thunk to clear all errors
+
 export const clearAllTimelineErrors = () => (dispatch) => {
     dispatch(timelineSlice.actions.clearAllErrors());
 };
+
+export const {
+    getAllTimelineRequest,
+    getAllTimelineSuccess,
+    getAllTimelineFailed,
+} = timelineSlice.actions;
 
 export default timelineSlice.reducer;
 

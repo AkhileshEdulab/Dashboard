@@ -1,99 +1,5 @@
 
 
-// import { Button } from '@/components/ui/button';
-// import { Input } from '@/components/ui/input';
-// import { Label } from '@radix-ui/react-label';
-// import React, { useEffect, useState } from 'react';
-// import SpacialLoadingButton from './SpacialLoadingButton';
-// import { clearAllErrors, getUser, resetProfile, updatePassword } from '@/store/slices/userSlice';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { toast } from 'react-toastify';
-// import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
-
-// const UpdatePassword = () => {
-//   const [currentPassword, setCurrentPassword] = useState('');
-//   const [newPassword, setNewPassword] = useState('');
-//   const [confirmNewPassword, setConfirmNewPassword] = useState('');
-
-//   const { loading, error,isUpdate, message } = useSelector((state) => state.user);
-//   const dispatch = useDispatch();
-
-//   const handleUpdatePassword = () => {
-//     console.log('Updating password...');
-//     dispatch(updatePassword( currentPassword, newPassword, confirmNewPassword ));
-//   };
-
-//   useEffect(() => {
-//     console.log('Effect triggered', { error, isUpdate, message });
-//     if (error) {
-//       toast.error(error);
-//       dispatch(clearAllErrors());
-//     }
-//     if (isUpdate) {
-//       toast.success('Password updated successfully');
-//       dispatch(getUser());
-//       dispatch(resetProfile()); 
-       
-//     }
-    
-//   }, [dispatch,loading, error, isUpdate,message]);
-
-//   return (
-//     <div className="w-full h-full">
-//       <div>
-//         <div className="grid w-[100%] gap-6">
-//           <div className="grid gap-2">
-//             <h1 className="text-3xl font-bold mb-5">Update Password</h1>
-//           </div>
-//         </div>
-
-//         <div className="grid gap-6">
-//           <div className='grid gap-2'>
-//             <Label>Current Password</Label>
-//             <Input
-//               type="text" // Changed to "password" for security
-//               value={currentPassword}
-//               onChange={(e) => setCurrentPassword(e.target.value)}
-             
-//             />
-//           </div>
-
-//           <div className='grid gap-2'>
-//             <Label>New Password</Label>
-            
-//             <Input
-//               type="text" // Changed to "password"
-//               value={newPassword}
-//               onChange={(e) => setNewPassword(e.target.value)}
-              
-//             />
-//           </div>
-
-//           <div className='grid gap-2'>
-//             <Label>Confirm New Password</Label>
-//             <Input
-//               type="text" // Changed to "password"
-//               value={confirmNewPassword}
-//               onChange={(e) => setConfirmNewPassword(e.target.value)}
-//             />
-//           </div>
-
-//           <div className="mt-6 flex justify-center">
-//             {!loading ? (
-//               <Button onClick={handleUpdatePassword} className="w-full">Update Password</Button>
-//             ) : (
-//               <SpacialLoadingButton content={"Updating"} />
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default UpdatePassword;
-
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@radix-ui/react-label';
@@ -102,7 +8,8 @@ import SpacialLoadingButton from './SpacialLoadingButton';
 import { clearAllErrors, getUser, resetProfile, updatePassword } from '@/store/slices/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'; // Importing icons
+import { FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
+
 
 const UpdatePassword = () => {
   const [currentPassword, setCurrentPassword] = useState('');

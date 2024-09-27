@@ -22,6 +22,9 @@ function ManageTimeline() {
 
   useEffect(() => {
     // Fetch the timeline data when the component loads
+    console.log("Timeline Data:", timeline); // Log the timeline data
+    console.log("Loading:", loading); // Log loading state
+    console.log("Error:", error); // Log any errors
     dispatch(getAllTimeline());
 
     if (error) {
@@ -88,3 +91,7 @@ function ManageTimeline() {
 }
 
 export default ManageTimeline;
+
+
+
+
