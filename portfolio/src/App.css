@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
+
+.dancing_text{
+  font-family: "Dancing Script",cursive;
+}
+::-webkit-scrollbar{
+  width: 15px;
+}
+
+::-webkit-scrollbar-track{
+  background: #d1e5ff;
+}
+
+.text-tubeLight-effect{
+  display: flex;
+  color: #fff;
+  position: relative;
+  text-transform: uppercase;
+  width: 100%;
+  outline: none;
+  overflow-y: hidden;
+  animation: animate 5s linear infinite;
+}
+
+@keyframes animate{
+  20%,
+  50%,
+  60%,
+  65%,
+  80%,
+  90%,
+  92%{
+    color: gray;
+    text-shadow: none;
+  }
+  18.1%,
+  20%,
+  30%,
+  50%,
+  60.1%,
+  65%,
+  80%,
+  90%,
+  92.1%,
+  100%{
+    color: #fff;
+    text-shadow:  0 0 1px rgb(150,150,150),
+    0 0 2px rgb(150,150,150)
+     0 0 2px rgb(150,150,150),
+      0 0 5px, rgb(150,150, 150),
+      0 0  20px rgb(150,150,150)
+  }
+}
