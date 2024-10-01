@@ -45,7 +45,12 @@ const AddSkill = () => {
       toast.success(message);
       dispatch(clearAllSkillErrors());
       dispatch(getAllSkills()); 
+      setTitle('');
+      setProficiency('');
+      setSvg(null);
+      setSvgPreview('');
     }
+    
   }, [dispatch, error, message]);
 
   return (

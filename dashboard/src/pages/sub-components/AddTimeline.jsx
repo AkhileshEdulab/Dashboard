@@ -38,6 +38,10 @@ function AddTimeline() {
       toast.success(message);
       dispatch(resetTimelineSlice());
       dispatch(getAllTimeline());
+      setTitle("");
+      setDescription("");
+      setFrom("");
+      setTo("");
     }
   }, [dispatch, error, message, loading]);
 

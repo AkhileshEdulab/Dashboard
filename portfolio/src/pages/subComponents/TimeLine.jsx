@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 const  TimeLine = () => {
-  const [timeline,setTimeline]= useState([]);
+  const [timelines,setTimeline]= useState([]);
 
   useEffect(() => {
     const getMyTimeline = async () => {
@@ -10,7 +10,7 @@ const  TimeLine = () => {
         const { data } = await axios.get("http://localhost:4000/api/v1/timeline/getall", {
           withCredentials: true,
         });
-        setTimeline(data.timeline);
+        setTimeline(data.timelines);
         console.log(data) 
       } catch (error) {
        
@@ -23,10 +23,16 @@ const  TimeLine = () => {
   return (
     <>
     <div>
-     <h1 className='overflow-x-hidden text[1.75rem] md:'>Timeline</h1>
+    {/* <h1 className='mb-5 font-bold flex items-center justify-center text-[4rem] '>TIMELINE</h1> */}
+    <h1
+  className="sm:flex gap-4 items-center text-[2rem] sm:text-[3rem] lg:text-[3.8rem] leading-[56px] md:leading-[67px] lg:leading-[67px] tracking-[15px] mx-auto w-fit font-extrabold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 p-4 rounded"
+>
+  TIME
+  <span className='text-tubeLight-effect-extrabold'>LINE</span>
+</h1>
 <ol className="relative border-s border-gray-200 dark:border-gray-700">                  
     {
-    timeline && timeline.map(element=>{
+    timelines && timelines.map(element=>{
       return(
       <li className="mb-10 ms-6" key={element._id}>
         <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
@@ -44,11 +50,9 @@ const  TimeLine = () => {
     
    
 </ol>
-
-
     </div>
     </>
   )
 }
 
-export default TimeLine
+export default TimeLine;

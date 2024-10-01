@@ -31,7 +31,7 @@ const timelineSlice = createSlice({
             state.loading = true;
         },
         deleteTimelineSuccess(state, action) {
-            state.message = action.payload; 
+           
             state.error = null;
             state.loading = false;
             state.message = action.payload[0];
@@ -76,8 +76,8 @@ export const getAllTimeline = () => async (dispatch) => {
         const { data } = await axios.get("http://localhost:4000/api/v1/timeline/getall", {
             withCredentials: true,
         });
-        console.log("Fetched timeline data:", data); // Log the fetched data
-        dispatch(getAllTimelineSuccess(data.timelines)); // Pass timeline data to success action
+        console.log("Fetched timeline data:", data); 
+        dispatch(getAllTimelineSuccess(data.timelines)); 
     } catch (error) {
         console.error("API Error:", error);
         dispatch(getAllTimelineFailed(

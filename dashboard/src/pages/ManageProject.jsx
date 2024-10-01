@@ -29,7 +29,9 @@ const ManageProject = () => {
     }
     if (message) {
       toast.success(message);
+      dispatch(getAllProjects());
       dispatch(resetProjectSlice());
+
     }
   }, [dispatch, loading, error, message]);
 

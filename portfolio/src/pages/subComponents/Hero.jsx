@@ -28,12 +28,13 @@ const Hero = () => {
 
   return (
     <>
-    <ModeToggle/>
+    
       <div className='w-full '>
         <div className="flex items-center gap-2 mb-2">
           <span className='bg-green-400 rounded-full h-2 w-2'></span>
-          <p>Online</p>
+            <p>Online</p>
         </div>
+        
         <h1 className='overflow-x-hidden text-[1.3rem] sm:text-[1.7rem] md:text-[2.2rem] lg:text-[2.8rem] tracking-[2px] mb-2'>
           {error ? error : `Hey, I'm ${user.fullName}`}
         </h1 >

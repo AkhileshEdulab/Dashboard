@@ -7,6 +7,8 @@ import SpacialLoadingButton from './sub-components/SpacialLoadingButton';
 import { Label } from '@radix-ui/react-dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 function ForgotPassword() {
@@ -33,9 +35,9 @@ function ForgotPassword() {
    <div className="w-full lg:grid lg:min-h-[100vh] lg:grid-cols-2 xl:min-h-[100vh]">
       <div className="min-h-[100vh] flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
-          <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">Forgot</h1>
-            <p className="text-balance text-muted-foreground">
+          <div className="grid gap-2 text-center ">
+          <div className='flex justify-center'> <FontAwesomeIcon icon={faUserCircle} className="text-9xl text-gray-800 dark:text-white mb-8" /></div>
+            <p className="text-muted-foreground flex justify-start">
               Enter your email to request password
             </p>
           </div>

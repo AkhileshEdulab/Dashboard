@@ -3,62 +3,10 @@ import { clearAllProjectSliceErrors, getAllProjects, resetProjectSlice, updatePr
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const UpdateProject = () => {
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [projectBanner, setProjectBanner] = useState("");
-  // const [gitRepoLink, setGitRepoLink] = useState("");
-  // const [projectLink, setProjectLink] = useState("");
-  // const [technologies, setTechnologies] = useState("");
-  // const [stack, setStack] = useState("");
-  // const [deployed, setDeployed] = useState("");
-  // const [projectBannerPreview, setProjectBannerPreview] = useState("");
-
-  // const { error, message, loading } = useSelector((state) => state.project);
-  // const { id } = useParams();
-  // const dispatch = useDispatch();
-  
-
-  // const handleProjectBannerPreview = (e) => {
-   
-  //   const file = e.target.files[0];
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onload = () => {
-  //     setProjectBanner(file);
-  //     setProjectBannerPreview(reader.result);
-  //   };
-  //   console.log("Project Banner File Selected:", file);
-  // };
-
-  
-  // const handleUpdateProject = (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-    
-  //   formData.append('title', title);
-    
-  //   formData.append('description', description);
-    
-  //   formData.append('projectBanner', projectBanner);
-    
-  //   formData.append('gitRepoLink', gitRepoLink);
-    
-  //   formData.append('projectLink', projectLink);
-    
-  //   formData.append('technologies', technologies);
-    
-  //   formData.append('stack', stack);
-    
-  //   formData.append('deployed', deployed);
-    
-  //   dispatch(UpdateProject(id,formData));
-  // };
-
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [projectBanner, setProjectBanner] = useState("");
@@ -72,7 +20,7 @@ const UpdateProject = () => {
   const { error, message, loading } = useSelector((state) => state.project);
   const { id } = useParams();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const handleProjectBannerPreview = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -82,7 +30,6 @@ const UpdateProject = () => {
       setProjectBannerPreview(reader.result);
     };
   };
-
   const handleUpdateProject = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -94,56 +41,52 @@ const UpdateProject = () => {
     formData.append('technologies', technologies);
     formData.append('stack', stack);
     formData.append('deployed', deployed);
-
-    // Dispatch the correct action
-    // dispatch(updateProject({ id, formData }));
-
-    dispatch(updateProject({ id: id.toString(), formData }));
+  
+    dispatch(updateProject(id.toString(), formData));
   };
 
+  useEffect(() => {
+    const getProject = async () => {
+      try {
+        const res = await axios.get(`http://localhost:4000/api/v1/project/get/${id}`, { withCredentials: true });
+        setTitle(res.data.project.title);
+        setDescription(res.data.project.description);
+        setGitRepoLink(res.data.project.gitRepoLink);
+        setDeployed(res.data.project.deployed);
+        setProjectLink(res.data.project.projectLink);
+        setTechnologies(res.data.project.technologies);
+        setStack(res.data.project.stack);
+        setProjectBanner(res.data.project.projectBanner?.url);
+        setProjectBannerPreview(res.data.project.projectBanner?.url);
+      } catch (error) {
+        console.error("Error fetching project:", error);
+        toast.error(error.response?.data?.message || 'Something went wrong');
+      }
+    };
+
+    getProject();
+  }, [id]);
 
   useEffect(() => {
-    console.log("Update Message:", message);
-    const getProject = async () => {
-      await axios
-        .get(`http://localhost:4000/api/v1/project/get/${id}`, { withCredentials: true })
-        .then((res) => {
-          setTitle(res.data.project.title);
-          setDescription(res.data.project.description);
-          setGitRepoLink(res.data.project.gitRepoLink);
-          setDeployed(res.data.project.deployed);
-          setProjectLink(res.data.project.projectLink);
-          setTechnologies(res.data.project.technologies);
-          setStack(res.data.project.stack);
-          setProjectBanner(res.data.project.projectBanner?.url);
-          setProjectBannerPreview(res.data.project.projectBanner?.url);
-        })
-        .catch((error) => {
-          console.error("Update Error:", error);
-          toast.error(error.response.data.message);
-        });
-    };
-    getProject();
-
     if (error) {
       toast.error(error);
       dispatch(clearAllProjectSliceErrors());
     }
     if (message) {
       toast.success(message);
+      navigate('/manage/project');
       dispatch(resetProjectSlice());
       dispatch(getAllProjects());
     }
-  }, [id, message, loading, error, dispatch]);
-
+  }, [error, message, dispatch]);
 
   return (
     <div className="min-h-screen p-6 bg-gray-100">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
         <form onSubmit={handleUpdateProject}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" >
-            Update Project 
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Update Project 
             </label>
             {projectBannerPreview && (
               <img
@@ -161,7 +104,7 @@ const UpdateProject = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" >
+            <label className="block text-gray-700 text-sm font-bold mb-2">
               Title
             </label>
             <input
@@ -174,7 +117,7 @@ const UpdateProject = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" >
+            <label className="block text-gray-700 text-sm font-bold mb-2">
               Description
             </label>
             <textarea
@@ -186,7 +129,7 @@ const UpdateProject = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" >
+            <label className="block text-gray-700 text-sm font-bold mb-2">
               GitHub Repository Link
             </label>
             <input
@@ -259,9 +202,9 @@ const UpdateProject = () => {
           </div>
 
           <div className="flex items-center justify-between">
-            <button
+            <button 
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               {loading ? 'Updating...' : 'Update Project'}
             </button>
@@ -273,7 +216,3 @@ const UpdateProject = () => {
 };
 
 export default UpdateProject;
-
-
-
-

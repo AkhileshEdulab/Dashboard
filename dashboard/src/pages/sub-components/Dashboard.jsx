@@ -5,19 +5,44 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 
 import { Tabs, TabsContent } from '@radix-ui/react-tabs';
 import React, { useEffect, useState } from 'react';
-import { useSelector,} from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector,} from 'react-redux';
+import { Link,} from 'react-router-dom';
 import SpacialLoadingButton from './SpacialLoadingButton';
 import { Progress } from '../../components/ui/progress';
+import { clearAllApplicationSliceErrors, deleteSoftwareApplication, getAllSoftwareApplication, resetApplicationSlice } from '../../store/slices/softwareApplicationSlice';
+import { toast } from 'react-toastify';
 
  
 
 const Dashboard = () => {
+  
   const { user } = useSelector((state) => state.user);
   const { projects } = useSelector((state) => state.project);
   const { skills } = useSelector((state) => state.skill); 
   const { timelines } = useSelector((state) => state.timeline); 
-  const { softwareApplication ,loading, } = useSelector((state) => state.application);
+  const { softwareApplication ,loading,error,message } = useSelector((state) => state.application);
+
+  const dispatch = useDispatch();
+  const[appId,setAppId] = useState("")
+  const handelDeleteSoftwareApp = (id) => {
+      dispatch(deleteSoftwareApplication(id));
+  };
+
+  useEffect(() => {
+    dispatch(getAllSoftwareApplication());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(clearAllApplicationSliceErrors());
+    }
+    if (message) {
+      toast.success(message);
+      dispatch(resetApplicationSlice());
+    }
+  }, [dispatch, loading, error, message]);
+
   
   return (
     <>
@@ -205,7 +230,7 @@ const Dashboard = () => {
                             <TableRow>
                               <TableHead>Title</TableHead>
                               <TableHead>From</TableHead>
-                              <TableHead>To</TableHead>
+                              <TableHead className='md:table-cell text-right '>To</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>

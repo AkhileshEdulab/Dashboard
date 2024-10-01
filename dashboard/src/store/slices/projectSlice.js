@@ -1,6 +1,6 @@
-// import {createSlice} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 import axios from "axios";
 
 const projectSlice = createSlice({
@@ -150,37 +150,27 @@ export const getAllProjects = () => async (dispatch) => {
 //     }
 //    }
 
-// Create AsyncThunk for updating project
-export const updateProject = createAsyncThunk(
-    'project/updateProject',
-    async ({ id, formData }, { rejectWithValue }) => {
-        try {
-            const { data } = await axios.put(`http://localhost:4000/api/v1/project/update/${id}`, formData, {
-                withCredentials: true,
-                headers: { "Content-Type": "multipart/form-data" }
-            });
-            return data.message[0]; // Return success message
-        } catch (error) {
-            return rejectWithValue(error.response.data.message); // Return error message
+export const updateProject = (id, newData) => async (dispatch) => {
+    dispatch(projectSlice.actions.updateProjectRequest());
+  
+    try {
+      const { data } = await axios.put(
+        `http://localhost:4000/api/v1/project/update/${id.toString()}`, 
+        newData,
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "multipart/form-data" },
         }
+      );
+  
+      dispatch(projectSlice.actions.updateProjectSuccess(data.message));
+      dispatch(projectSlice.actions.clearAllErrors());
+    } catch (error) {
+      const errorMessage = error?.response?.data?.message || 'Something went wrong';
+      dispatch(projectSlice.actions.updateProjectFailed(errorMessage));
     }
-);
+  };
 
-// Handle AsyncThunk actions in extraReducers
-projectSlice.extraReducers = (builder) => {
-    builder
-        .addCase(updateProject.pending, (state) => {
-            state.loading = true;
-        })
-        .addCase(updateProject.fulfilled, (state, action) => {
-            state.loading = false;
-            state.message = action.payload; // Action payload is the success message
-        })
-        .addCase(updateProject.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload; // Action payload is the error message
-        });
-};
 
    export const clearAllProjectSliceErrors = ()=>async(dispatch)=>{
         dispatch(projectSlice.actions.clearAllErrors());

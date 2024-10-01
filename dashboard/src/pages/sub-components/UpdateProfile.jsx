@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import SpacialLoadingButton from './SpacialLoadingButton';
 
 const UpdateProfile = () => {
-  const { user, loading, error, isUpdated, message } = useSelector((state) => state.user);
+  const { user, loading, error, message } = useSelector((state) => state.user);
   const [fullName, setFullName] = useState(user?.fullName || '');
   const [email, setEmail] = useState(user?.email || '');
   const [phone, setPhone] = useState(user?.phone || '');
@@ -27,8 +27,7 @@ const UpdateProfile = () => {
   const [resume, setResume] = useState(null);
   const [resumePreview, setResumePreview] = useState(user?.resume?.url || '');
 
-  const dispatch = useDispatch();
-
+  
   const avatarHandler = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -78,16 +77,17 @@ const UpdateProfile = () => {
 
     dispatch(updateProfile(formData));
   };
-
+  
+  const dispatch = useDispatch();
   useEffect(() => {
     if (error) {
       toast.error(error);
       dispatch(clearAllErrors());
     }
-    if (isUpdated) {
+    if (message) {
+      toast.success(message);
       dispatch(getUser());
       dispatch(resetProfile());
-      toast.success(message);
     }
     if (user) {
       setFullName(user.fullName || '');
@@ -103,7 +103,7 @@ const UpdateProfile = () => {
       setAvatarPreview(user.avatar?.url || '');
       setResumePreview(user.resume?.url || '');
     }
-  }, [user, isUpdated, error, message, dispatch]);
+  }, [user,  error, message, dispatch]);
 
   return (
     <div className="w-full h-full p-4 sm:p-6 md:p-8">

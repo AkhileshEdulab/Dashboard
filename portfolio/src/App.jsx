@@ -14,14 +14,16 @@ function App() {
 
   return (
     <>
+   
        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+       
       <Router>
         
         <Routes>
           <Route path='/' element={<Home />}>Home</Route>
           <Route path='/project/:id' element={<ProjectView />}>Home</Route>
         </Routes>
-        <Footer/>
+        <Footer />
         <ToastContainer position='bottom-right theam-dark'/>
       </Router>
     </ThemeProvider>

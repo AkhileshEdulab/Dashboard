@@ -205,10 +205,8 @@ export const updatePassword = (currentPassword, newPassword, confirmNewPassword)
 //   }
 // }
 
-
-
 export const updateProfile = (newData) => async (dispatch) => {
-  dispatch(userSlice.actions.updateProfileRequest());  // Corrected line
+  dispatch(userSlice.actions.updateProfileRequest()); 
   try {
     const { data } = await axios.put(
       "http://localhost:4000/api/v1/user/update/me",
@@ -220,8 +218,8 @@ export const updateProfile = (newData) => async (dispatch) => {
     );
     dispatch(userSlice.actions.updateProfileSuccess(data.message));
     dispatch(userSlice.actions.clearAllErrors());
+   
   } catch (error) {
-    console.error("Error:", error.response?.data || error);  // Log the error details
     const errorMessage = error.response?.data?.message || "Profile update failed";
     dispatch(userSlice.actions.updateProfileFailed(errorMessage));
   }

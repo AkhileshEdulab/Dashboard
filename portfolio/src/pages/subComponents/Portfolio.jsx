@@ -27,7 +27,7 @@ const  Portfolio = ()=> {
 
   return (
     <div>
-      <div className='relative mb-12'>
+      <div className='relative mb-12 mt-12'>
       <h1 className="hidden sm:flex  gap-4 items-center text-[2rem] sm:text-[3rem] lg:text-[3.8rem] leading-[56px] md:leading-[67px] lg:leading-[67px] tracking-[15px] mx-auto w-fit font-extrabold" 
         style={{ background: "hsl(222.2, 84%, 4.9%)" }}> 
         MY

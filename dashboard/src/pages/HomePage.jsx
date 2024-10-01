@@ -49,9 +49,9 @@ function HomePage() {
   },[isAuthenticated]);
   return (
    <>
-    <div className='flex min-h-screen w-full flex-col bg-muted/40'>
-      <aside className='fixed inset-y-0 left-0 hidden w-14 flex-col border-r bg-background sm:flex z-50 shadow-2xl'>
-        <nav className='flex flex-col items-center gap-4 px-2 sm:py-5'>
+    <div className='flex min-h-screen w-full flex-col bg-muted/40 '>
+      <aside className='fixed inset-y-0 left-0 hidden w-14 flex-col border-r bg-background sm:flex z-50 shadow-2xl '>
+        <nav className='flex flex-col items-center gap-4 px-2 sm:py-5 '>
           <Link className='group flex h-p w-p shrink-0 items-center justify-center gap-2 rounded-full'>
            <Package className='h-6 w-6 transition-all group-hover:scale-110'/>
             <span className='sr-only'>Dashboard</span>
@@ -59,98 +59,111 @@ function HomePage() {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Dashboard"? "text-accent-foreground bg-accent":"text-muted-foreground"}
-                   transition-colors hover:text-foreground md:h-8 md:w-8`}
+                  <Link className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Dashboard"? "text-accent-foreground ":"text-muted-foreground"}
+                   transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-slate-300`}
                    onClick={()=>setActive("Dashboard")}>
                     <Home className='w-5 h-5 '/>
                     <span className='sr-only'>Dashboard</span>
                   </Link>
                   </TooltipTrigger>
-                <TooltipContent side='right'>Dashboard</TooltipContent>
+                {/* <TooltipContent side='right' >Dashboard</TooltipContent> */}
+                <TooltipContent side='right' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-2 rounded-lg shadow-lg transition duration-300 ease-in-out'>Dashboard</TooltipContent>
               </Tooltip>
             </TooltipProvider>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Add Project"? "text-accent-foreground bg-accent":"text-muted-foreground"}
-                   transition-colors hover:text-foreground md:h-8 md:w-8`} 
+                   transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-slate-300`} 
                     onClick={()=>setActive("Add Project")}
                     >
                     <Folder className='w-5 h-5 '/>
                     <span className='sr-only'>Add Project</span>
                   </Link>
                   </TooltipTrigger>
-                <TooltipContent side='right'>Add Project</TooltipContent>
+                {/* <TooltipContent side='right'>Add Project</TooltipContent> */}
+                <TooltipContent side='right' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-2 rounded-lg shadow-lg transition duration-300 ease-in-out'>Add Project</TooltipContent>
+              
               </Tooltip>
             </TooltipProvider>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Add Skills"? "text-accent-foreground bg-accent":"text-muted-foreground"}
-                   transition-colors hover:text-foreground md:h-8 md:w-8`} 
+                   transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-slate-300`} 
                     onClick={()=>setActive("Add Skills")}
                     >
                     <PencilRuler className='w-5 h-5 '/>
                     <span className='sr-only'>Add Skills</span>
                   </Link>
                   </TooltipTrigger>
-                <TooltipContent side='right'>Add Skills</TooltipContent>
+                {/* <TooltipContent side='right'>Add Skills</TooltipContent> */}
+                <TooltipContent side='right' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-2 rounded-lg shadow-lg transition duration-300 ease-in-out'>Add Skills</TooltipContent>
+              
               </Tooltip>
             </TooltipProvider>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Add Application"? "text-accent-foreground bg-accent":"text-muted-foreground"}
-                   transition-colors hover:text-foreground md:h-8 md:w-8`} 
+                   transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-slate-300`} 
                     onClick={()=>setActive("Add Application")}
                     >
                     <LayoutGrid className='w-5 h-5 '/>
                     <span className='sr-only'>Add Application</span>
                   </Link>
                   </TooltipTrigger>
-                <TooltipContent side='right'>Add Application</TooltipContent>
+                {/* <TooltipContent side='right'>Add Application</TooltipContent> */}
+                <TooltipContent side='right' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-2 rounded-lg shadow-lg transition duration-300 ease-in-out'>Add Application</TooltipContent>
+              
               </Tooltip>
             </TooltipProvider>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Add Timeline"? "text-accent-foreground bg-accent":"text-muted-foreground"}
-                   transition-colors hover:text-foreground md:h-8 md:w-8`} 
+                   transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-slate-300`} 
                     onClick={()=>setActive("Add Timeline")}
                     >
                     <History className='w-5 h-5 '/>
                     <span className='sr-only'>Add Timeline</span>
                   </Link>
                   </TooltipTrigger>
-                <TooltipContent side='right'>Add Timeline</TooltipContent>
+                {/* <TooltipContent side='right'>Add Timeline</TooltipContent> */}
+                <TooltipContent side='right' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-2 rounded-lg shadow-lg transition duration-300 ease-in-out'>Add Timeline</TooltipContent>
+              
               </Tooltip>
             </TooltipProvider>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Messages"? "text-accent-foreground bg-accent":"text-muted-foreground"}
-                   transition-colors hover:text-foreground md:h-8 md:w-8`} 
+                   transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-slate-300`} 
                     onClick={()=>setActive("Messages")}
                     >
                     <MessageSquareMore className='w-5 h-5 '/>
                     <span className='sr-only'>Messages</span>
                   </Link>
                   </TooltipTrigger>
-                <TooltipContent side='right'>Messages</TooltipContent>
+                {/* <TooltipContent side='right'>Messages</TooltipContent> */}
+                <TooltipContent side='right' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-2 rounded-lg shadow-lg transition duration-300 ease-in-out'>Message</TooltipContent>
+              
               </Tooltip>
             </TooltipProvider>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Account"? "text-accent-foreground bg-accent":"text-muted-foreground"}
-                   transition-colors hover:text-foreground md:h-8 md:w-8`} 
+                   transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-slate-300`} 
                     onClick={()=>setActive("Account")}
                     >
                     <User className='w-5 h-5 '/>
                     <span className='sr-only'>Account</span>
                   </Link>
                   </TooltipTrigger>
-                <TooltipContent side='right'>Account</TooltipContent>
+                {/* <TooltipContent side='right'>Account</TooltipContent> */}
+                <TooltipContent side='right' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-2 rounded-lg shadow-lg transition duration-300 ease-in-out'>Account</TooltipContent>
+              
               </Tooltip>
             </TooltipProvider>
         </nav>
@@ -159,14 +172,15 @@ function HomePage() {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Logout"? "text-accent-foreground bg-accent":"text-muted-foreground"}
-                   transition-colors hover:text-foreground md:h-8 md:w-8`} 
+                   transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-slate-300`} 
                     onClick={handleLogout}
                     >
                     <LogOut className='w-5 h-5 '/>
                     <span className='sr-only'>Logout</span>
                   </Link>
                   </TooltipTrigger>
-                <TooltipContent side='right'>Logout</TooltipContent>
+                <TooltipContent side='right' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-2 rounded-lg shadow-lg transition duration-300 ease-in-out'>Logout</TooltipContent>
+              
               </Tooltip>
             </TooltipProvider>
         </nav>

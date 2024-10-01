@@ -58,6 +58,15 @@ const AddProject = () => {
       toast.success(message);
       dispatch(resetProjectSlice());
       dispatch(getAllProjects());
+      setTitle("");
+      setDescription("");
+      setProjectBanner("");
+      setProjectBannerPreview("");
+      setGitRepoLink("");
+      setProjectLink("");
+      setTechnologies("");
+      setStack("");
+      setDeployed("");
     }
   }, [dispatch, error, message]);
 
@@ -68,14 +77,14 @@ const AddProject = () => {
       <form onSubmit={handleAddNewProject} className="w-[100%] px-5 md:w-[1000px]">
         <h2 className="text-2xl font-bold text-center">Add New Project</h2>
 
-        <div className="mt-4">
-          <Label className="block text-sm font-medium">Title</Label>
+        <div className="mt-4 ">
+          <Label className="block text-sm font-medium ">Title</Label>
           <input
             type="text"
             placeholder='Project Title'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 block w-full border rounded-md"
+            className="mt-1 block w-full border rounded-md p-2"
            
           />
         </div>
@@ -107,7 +116,7 @@ const AddProject = () => {
         <div className="mt-4">
           <Label className="block text-sm font-medium">Stack</Label>
           <Select value={stack} onValueChange={(selectedValue)=> setStack(selectedValue)}>
-            <SelectTrigger>
+            <SelectTrigger className='text-gray-400'>
               <SelectValue placeholder="Select Project Stack"/> 
             </SelectTrigger>
             <SelectContent>
@@ -123,10 +132,10 @@ const AddProject = () => {
         </div>
 
         <div className="mt-4">
-          <Label className="block text-sm font-medium">Deployed</Label>
+          <Label className="block text-sm font-medium ">Deployed</Label>
           <Select value={deployed} onValueChange={(selectedValue)=> setDeployed(selectedValue)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Is This Project Deployed"/> 
+            <SelectTrigger className='text-gray-400'>
+              <SelectValue placeholder="Is This Project Deployed " /> 
             </SelectTrigger>
             <SelectContent>
               <SelectItem value = "Yes">Yes</SelectItem>
@@ -143,7 +152,7 @@ const AddProject = () => {
             placeholder='Paste Your Github Repository Link Here'
             value={gitRepoLink}
             onChange={(e) => setGitRepoLink(e.target.value)}
-            className="mt-1 block w-full border rounded-md"
+            className="mt-1 block w-full border rounded-md p-2"
            
           />
         </div>
@@ -155,7 +164,7 @@ const AddProject = () => {
             placeholder='Paste Your Deployed Project Link here'
             value={projectLink}
             onChange={(e) => setProjectLink(e.target.value)}
-            className="mt-1 block w-full border rounded-md"
+            className="mt-1 block w-full border rounded-md p-2"
            
           />
         </div>
@@ -197,17 +206,15 @@ const AddProject = () => {
         </div>
 
         <div className="mt-6">
-          {/* { loading ? (
+          { loading ? (
             <SpacialLoadingButton width={"w-56"} content={"Adding"} />
           ) : (
             <Button type="submit" className="w-56 mb-4 text-center">
               Add Project
             </Button>
-          )} */}
+          )}
 
-            <Button type="submit" className="w-56 mb-4 text-center">
-              Add Project
-            </Button>
+            
         </div>
       </form>
     </div>
